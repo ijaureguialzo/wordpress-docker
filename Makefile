@@ -1,12 +1,33 @@
-help:
+#!make
+
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+else
+$(error No se encuentra el fichero .env)
+endif
+
+help: _header
+	${info }
 	@echo Opciones:
-	@echo -------------------
+	@echo ----------------------------------
 	@echo start / stop / restart
 	@echo build
 	@echo workspace
 	@echo stats
 	@echo clean
-	@echo -------------------
+	@echo ----------------------------------
+
+_header:
+	@echo ---------
+	@echo Wordpress
+	@echo ---------
+
+_urls: _header
+	${info }
+	@echo ----------------------------------
+	@echo [WordPress] https://wordpress.test
+	@echo ----------------------------------
 
 _start-command:
 	@docker compose up -d --remove-orphans
@@ -32,9 +53,3 @@ stats:
 
 clean:
 	@docker compose down -v --remove-orphans
-
-_urls:
-	${info }
-	@echo -------------------
-	@echo [WordPress] https://wordpress.test
-	@echo -------------------
