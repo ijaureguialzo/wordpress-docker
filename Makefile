@@ -2,6 +2,7 @@ help:
 	@echo Opciones:
 	@echo -------------------
 	@echo start / stop / restart
+	@echo build
 	@echo workspace
 	@echo stats
 	@echo clean
@@ -10,12 +11,18 @@ help:
 _start-command:
 	@docker-compose up -d --remove-orphans
 
-start: _start-command _urls
+_get_local_ip:
+	@docker compose exec wordpress get_local_ip.sh
+
+start: _start-command _get_local_ip _urls
 
 stop:
 	@docker-compose stop
 
 restart: stop start
+
+build:
+	@docker compose build
 
 workspace:
 	@docker-compose exec wordpress /bin/bash

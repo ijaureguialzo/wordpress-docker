@@ -19,7 +19,9 @@ services:
       - wordpress
 
   wordpress:
-    image: wordpress:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     expose:
       - 80
     environment:
