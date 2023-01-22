@@ -7,7 +7,7 @@ services:
     environment:
       CLIENT_MAX_BODY_SIZE: 1024M
       DOMAINS: >
-        wordpress.test -> http://wordpress:80,
+        ${WORDPRESS_HOSTNAME} -> http://wordpress:80,
       STAGE: local
     volumes:
       - https-portal_certs:/var/lib/https-portal

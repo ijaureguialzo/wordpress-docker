@@ -26,14 +26,14 @@ _header:
 _urls: _header
 	${info }
 	@echo ----------------------------------
-	@echo [WordPress] https://wordpress.test
+	@echo [WordPress] https://${WORDPRESS_HOSTNAME}
 	@echo ----------------------------------
 
 _start-command:
 	@docker compose up -d --remove-orphans
 
 _get_local_ip:
-	@docker compose exec wordpress get_local_ip.sh
+	@docker compose exec wordpress get_local_ip.sh ${WORDPRESS_HOSTNAME}
 
 start: _start-command _get_local_ip _urls
 
