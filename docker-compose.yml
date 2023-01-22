@@ -12,9 +12,11 @@ services:
     volumes:
       - https-portal_certs:/var/lib/https-portal
       - https-portal_logs:/var/log/nginx
+    networks:
+      - wordpress
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     depends_on:
       - wordpress
 
@@ -33,6 +35,8 @@ services:
       - wordpress:/var/www/html
     depends_on:
       - db
+    networks:
+      - wordpress
 
   db:
     image: mariadb:latest
@@ -43,6 +47,11 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - wordpress
+
+networks:
+  wordpress:
 
 volumes:
   https-portal_certs:
