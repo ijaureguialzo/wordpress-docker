@@ -9,7 +9,7 @@ help:
 	@echo -------------------
 
 _start-command:
-	@docker-compose up -d --remove-orphans
+	@docker compose up -d --remove-orphans
 
 _get_local_ip:
 	@docker compose exec wordpress get_local_ip.sh
@@ -17,7 +17,7 @@ _get_local_ip:
 start: _start-command _get_local_ip _urls
 
 stop:
-	@docker-compose stop
+	@docker compose stop
 
 restart: stop start
 
@@ -25,13 +25,13 @@ build:
 	@docker compose build
 
 workspace:
-	@docker-compose exec wordpress /bin/bash
+	@docker compose exec wordpress /bin/bash
 
 stats:
 	@docker stats
 
 clean:
-	@docker-compose down -v --remove-orphans
+	@docker compose down -v --remove-orphans
 
 _urls:
 	${info }
